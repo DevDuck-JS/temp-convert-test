@@ -1,14 +1,22 @@
-const celsius = document.querySelector("#celsius");
-const fahrenheit = document.querySelector("#fahrenheit");
+// Pure functions for temperature conversion
+function convertCelsiusToFahrenheit(celsiusValue) {
+  if (isNaN(celsiusValue) || celsiusValue === "") {
+    return "NaN";
+  }
+  return ((celsiusValue * 9) / 5 + 32).toFixed(2);
+}
 
-console.log(celsius);
-console.log(fahrenheit);
+function convertFahrenheitToCelsius(fahrenheitValue) {
+  if (isNaN(fahrenheitValue) || fahrenheitValue === "") {
+    return "NaN";
+  }
+  return (((fahrenheitValue - 32) * 5) / 9).toFixed(2);
+}
 
-window.addEventListener("load", () => celsius.focus());
-
-celsius.addEventListener("input", () => {
+// Function to handle Celsius to Fahrenheit input and display
+function handleCelsiusInput() {
   const celsiusValue = celsius.value;
-  const calculatedFahrenheit = ((celsiusValue * 9) / 5 + 32).toFixed(2);
+  const calculatedFahrenheit = convertCelsiusToFahrenheit(celsiusValue);
 
   fahrenheit.value = calculatedFahrenheit;
 
@@ -17,12 +25,13 @@ celsius.addEventListener("input", () => {
     `Celsius: ${celsiusValue}, Calculated Fahrenheit: ${calculatedFahrenheit}`
   );
 
-  if (!celsius.value) fahrenheit.value = "";
-});
+  if (!celsiusValue) fahrenheit.value = "";
+}
 
-fahrenheit.addEventListener("input", () => {
+// Function to handle Fahrenheit to Celsius input and display
+function handleFahrenheitInput() {
   const fahrenheitValue = fahrenheit.value;
-  const calculatedCelsius = (((fahrenheitValue - 32) * 5) / 9).toFixed(2);
+  const calculatedCelsius = convertFahrenheitToCelsius(fahrenheitValue);
 
   celsius.value = calculatedCelsius;
 
@@ -31,5 +40,12 @@ fahrenheit.addEventListener("input", () => {
     `Fahrenheit: ${fahrenheitValue}, Calculated Celsius: ${calculatedCelsius}`
   );
 
-  if (!fahrenheit.value) celsius.value = "";
-});
+  if (!fahrenheitValue) celsius.value = "";
+}
+
+module.exports = {
+  convertCelsiusToFahrenheit,
+  convertFahrenheitToCelsius,
+  handleCelsiusInput,
+  handleFahrenheitInput,
+};

@@ -1,4 +1,4 @@
-// Pure functions for temperature conversion
+// Functions for temperature conversion
 function convertCelsiusToFahrenheit(celsiusValue) {
   if (isNaN(celsiusValue) || celsiusValue === "") {
     return "NaN";
